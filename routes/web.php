@@ -40,6 +40,11 @@ Route::get('/articles/{article}', 'ArticlesController@show');
 //forms that submit PUT requests
 Route::get('/articles/{article}/edit', 'ArticlesController@edit');
 Route::put('/articles/{article}', 'ArticlesController@update');
+//for authentication
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')
+->middleware('auth')->only(['store','update']);
 
 
 //GET,POST,PUT,PATCH,DELETE
@@ -64,3 +69,7 @@ Route::put('/articles/{article}', 'ArticlesController@update');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

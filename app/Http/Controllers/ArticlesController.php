@@ -4,22 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\Tag;
+
 
 class ArticlesController extends Controller
 {
     public function index()
     {
-        // to fetch  article that belongs to particular tag
-        if(request('tag')) 
-        {
-            $articles =Tag::where('name',request('tag'))->firstOrFail->articles;
-        
-        }else
-       
-        {
-
-     $articles = Article::latest()->get();
-        }
+        // select * from articles where user_id=2
+        //using auth() helper function
+        //where the user_id is equal to the auth_id
+        $articles = Article::where('user_id',auth()->id())->get();
      return view('articles.index',['articles'=>$articles]);
     }
 
@@ -32,7 +27,10 @@ class ArticlesController extends Controller
     
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create',[
+            'tags'=>Tag::all()
+        ]);
+
     }
 
     
@@ -43,7 +41,8 @@ class ArticlesController extends Controller
             'excerpt'=>'required',
             'body'=>'required'
         ]);
-        Article::create($validatedAttributes);
+        //the user_id column must be the auth_id
+        Article::create($validatedAttributes *['user_id'=>auth()->id()]);
        return redirect('/articles');
     }
 

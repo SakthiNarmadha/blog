@@ -42,6 +42,25 @@
 <input class="input" type="textarea" name="body" id="body" value="{{old('body')}}">
 </div>
 </div>
+
+
+<!--displaying tags in create form
+<div class="field">
+<label class="label" for="excerpt">Tags</label>
+<div class="control">
+<select name="tags[]"multiple>
+@foreach($tags as $tag)
+<option value="{{$tag->id}}">{{$tag->name}}</option>
+@endforeach
+
+</select>
+@error('tags')
+<p class="help is-danger">{{$message}}</p>
+@enderror
+</div>
+</div>-->
+
+
 <div class="field is-grouped">
 <div class="control">
 <button class="button is-link" type="submit">Submit</button>
