@@ -21,9 +21,13 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Gate $gate)
     {
         $this->registerPolicies();
+        //the laravel first trigger the boot()method,gate class
+        $gate->before(function($user){
+            return $user->id == 2;//this is an admin id
+        });
 
         //
     }

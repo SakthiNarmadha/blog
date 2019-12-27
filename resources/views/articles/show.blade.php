@@ -32,6 +32,14 @@
 		<div id="content">
 			<div class="title">
 				<h2>{{$article->title}}</h2>
+
+                <!--we mostly use this when any one can view particular page
+				but certain can update  .The submit button
+				 can be shown to only the owner or the admin
+				@can('update',$project)
+				<a href="">Update</a>
+				@endcan-->
+
 				<span class="byline">{{$article->excerpt}}</span> </div>
 			<p><img src="/images/banner.jpg" alt="" class="image image-full" /> </p>
 			{{$article->body}}
@@ -49,4 +57,6 @@
 	<p>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
 </div>
 @endsection('content')
+
+
 

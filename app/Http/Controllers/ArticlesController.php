@@ -21,10 +21,21 @@ class ArticlesController extends Controller
 
     public function show(Article $article)
     {
+        //if article user_id is not equal to the auth_id
+        // then abort with 403
+        if($article->user_id !== auth()->id()){
+            abort(403);
+
+            //abort_unless(auth()->user()->owns($article),483);
+            //this->authorize('view',$article);
+            //We can also use laravel gate which 
+            //acts as big wall to enter the application
+            //if(\Gate::denies('update',$project))
+        }
+
      return view('articles.show',['article'=>$article]);
     }
 
-    
     public function create()
     {
         return view('articles.create',[
